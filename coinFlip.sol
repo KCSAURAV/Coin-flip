@@ -41,7 +41,7 @@ contract coinFlip{
     for(uint i = 0; i<players.length;i++){
     if(keccak256(abi.encodePacked( outcome )) == keccak256( abi.encodePacked( players[i].guess ))){
       players[i].token *= 2; // double it
-    } else players[i].token /= 2; // make it half
+    } else players[i].token = 0; // make it zero
     }
   }
   
