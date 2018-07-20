@@ -31,7 +31,7 @@ contract coinFlip{
   }
   
   function coinToss() internal view returns(string){
-    uint rand = uint(block.blockhash(block.number-1)) % 10 + 1; // Generates a random uint
+    uint rand = uint(blockhash(block.number-1)) % 10 + 1; // Generates a random uint
     if( rand%2 == 0 ) return "H";
     else return "T";
   }
@@ -39,7 +39,7 @@ contract coinFlip{
   function evaluate() public{
     outcome = coinToss();
     for(uint i = 0; i<players.length;i++){
-    if(keccak256( outcome ) == keccak256( players[i].guess )){
+    if(keccak256(abi.encodePacked( outcome )) == keccak256( abi.encodePacked( players[i].guess ))){
       players[i].token *= 2; // double it
     } else players[i].token /= 2; // make it half
     }
